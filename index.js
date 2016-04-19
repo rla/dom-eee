@@ -30,10 +30,10 @@ function single(env, element, spec) {
         throw new Error('Selector must be set, context: ' + spec);
     }
     var dom = spec.selector === ':self' ? element :
-    	env.single(element, spec.selector);
+        env.single(element, spec.selector);
     if (dom) {
         if (spec.attribute) {
-        	// Extracts attribute value.
+            // Extracts attribute value.
             return env.attribute(dom, spec.attribute);
         } else if (spec.property) {
             return env.property(dom, spec.property);
@@ -70,27 +70,27 @@ function evaluate(env, element, spec, options) {
 // Sets up environment (browser, cheerio).
 
 module.exports = function(root, spec, options) {
-	if (typeof options === 'undefined') {
-		options = {};
-	}
-	if (typeof options.env === 'undefined') {
-		options.env = 'browser';
-	}
-	var env = environments[options.env];
-	if (!env) {
-		throw new Error('Unknown environment: ' + options.env);
-	}
-	var instance = null;
-	if (options.env === 'cheerio') {
-		if (typeof options.cheerio === 'undefined') {
-			throw new Error('Cheerio context not set.');
-		} else {
-			// Cheerio-specific instance.
-			instance = env(options.cheerio);
-		}
-	} else {
-		// New generic environment instance.
-		instance = env();
-	}
+    if (typeof options === 'undefined') {
+        options = {};
+    }
+    if (typeof options.env === 'undefined') {
+        options.env = 'browser';
+    }
+    var env = environments[options.env];
+    if (!env) {
+        throw new Error('Unknown environment: ' + options.env);
+    }
+    var instance = null;
+    if (options.env === 'cheerio') {
+        if (typeof options.cheerio === 'undefined') {
+            throw new Error('Cheerio context not set.');
+        } else {
+            // Cheerio-specific instance.
+            instance = env(options.cheerio);
+        }
+    } else {
+        // New generic environment instance.
+        instance = env();
+    }
     return evaluate(instance, root, spec, options);
 };
