@@ -45,7 +45,7 @@ described below.
 
 ObjectExpression:
 
-```json
+```javascript
 {
     "prop1": Expression,
     "prop2": Expression
@@ -60,7 +60,7 @@ SingleExpression, returning
 
 CollectionExpression:
 
-```json
+```javascript
 {
     "type": "collection",
     "selector": CSSSelector,
@@ -79,7 +79,7 @@ raw elements is first filtered through the FilterExpression.
 
 SingleExpression:
 
-```json
+```javascript
 {
     "type": "single",
     "selector": CSSSelector,
@@ -98,7 +98,7 @@ the default.
 
 FilterExpression:
 
-```json
+```javascript
 {
     "exists": CSSSelector
 }
