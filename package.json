@@ -1,6 +1,6 @@
 {
   "name": "dom-eee",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "devDependencies": {
     "browserify": "^13.0.0",
     "cheerio": "^0.20.0",
