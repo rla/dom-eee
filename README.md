@@ -56,7 +56,7 @@ ObjectExpression returns an object with given properties.
 Property values are described by further Expressions.
 
 Expression is either CollectionExpression or
-SingleExpression, returning 
+SingleExpression, returning a value described by it.
 
 CollectionExpression:
 
