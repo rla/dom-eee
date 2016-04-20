@@ -48,6 +48,7 @@ function single(env, element, spec) {
 // Toplevel recursive evaluation function.
 
 function evaluate(env, element, spec, options) {
+    // TODO check that element is set.
     var ret = {};
     Object.keys(spec).forEach(function(key) {
         var object = spec[key];

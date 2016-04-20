@@ -31,10 +31,10 @@ function single(env, element, spec) {
         throw new Error('Selector must be set, context: ' + spec);
     }
     var dom = spec.selector === ':self' ? element :
-    	env.single(element, spec.selector);
+        env.single(element, spec.selector);
     if (dom) {
         if (spec.attribute) {
-        	// Extracts attribute value.
+            // Extracts attribute value.
             return env.attribute(dom, spec.attribute);
         } else if (spec.property) {
             return env.property(dom, spec.property);
@@ -49,6 +49,7 @@ function single(env, element, spec) {
 // Toplevel recursive evaluation function.
 
 function evaluate(env, element, spec, options) {
+    // TODO check that element is set.
     var ret = {};
     Object.keys(spec).forEach(function(key) {
         var object = spec[key];
@@ -71,28 +72,28 @@ function evaluate(env, element, spec, options) {
 // Sets up environment (browser, cheerio).
 
 module.exports = function(root, spec, options) {
-	if (typeof options === 'undefined') {
-		options = {};
-	}
-	if (typeof options.env === 'undefined') {
-		options.env = 'browser';
-	}
-	var env = environments[options.env];
-	if (!env) {
-		throw new Error('Unknown environment: ' + options.env);
-	}
-	var instance = null;
-	if (options.env === 'cheerio') {
-		if (typeof options.cheerio === 'undefined') {
-			throw new Error('Cheerio context not set.');
-		} else {
-			// Cheerio-specific instance.
-			instance = env(options.cheerio);
-		}
-	} else {
-		// New generic environment instance.
-		instance = env();
-	}
+    if (typeof options === 'undefined') {
+        options = {};
+    }
+    if (typeof options.env === 'undefined') {
+        options.env = 'browser';
+    }
+    var env = environments[options.env];
+    if (!env) {
+        throw new Error('Unknown environment: ' + options.env);
+    }
+    var instance = null;
+    if (options.env === 'cheerio') {
+        if (typeof options.cheerio === 'undefined') {
+            throw new Error('Cheerio context not set.');
+        } else {
+            // Cheerio-specific instance.
+            instance = env(options.cheerio);
+        }
+    } else {
+        // New generic environment instance.
+        instance = env();
+    }
     return evaluate(instance, root, spec, options);
 };
 
@@ -100,47 +101,47 @@ module.exports = function(root, spec, options) {
 // Helper to extract data from browser context.
 
 module.exports = function() {
-	return {
-		single: function(element, selector) {
-			return element.querySelector(selector);
-		},
-		collection: function(element, selector) {
-			return Array.prototype.slice.call(
-				element.querySelectorAll(selector), 0);
-		},
-		attribute: function(element, attribute) {
-			return element.getAttribute(attribute);
-		},
-		property: function(element, property) {
-			return element[property];
-		},
-		text: function(element) {
-			return element.textContent;
-		},
-	};
+    return {
+        single: function(element, selector) {
+            return element.querySelector(selector);
+        },
+        collection: function(element, selector) {
+            return Array.prototype.slice.call(
+                element.querySelectorAll(selector), 0);
+        },
+        attribute: function(element, attribute) {
+            return element.getAttribute(attribute);
+        },
+        property: function(element, property) {
+            return element[property];
+        },
+        text: function(element) {
+            return element.textContent;
+        },
+    };
 };
 
 },{}],3:[function(require,module,exports){
 // Helper to extract data from Cheerio context.
 
 module.exports = function($) {
-	return {
-		single: function(element, selector) {
-			return $(selector, element);
-		},
-		collection: function(element, selector) {
-			return $(selector, element).toArray();
-		},
-		attribute: function(element, attribute) {
-			return $(element).attr(attribute);
-		},
-		property: function(element, property) {
-			return $(element).prop(property);
-		},
-		text: function(element) {
-			return $(element).text();
-		}
-	};
+    return {
+        single: function(element, selector) {
+            return $(selector, element);
+        },
+        collection: function(element, selector) {
+            return $(selector, element).toArray();
+        },
+        attribute: function(element, attribute) {
+            return $(element).attr(attribute);
+        },
+        property: function(element, property) {
+            return $(element).prop(property);
+        },
+        text: function(element) {
+            return $(element).text();
+        }
+    };
 };
 
 },{}],4:[function(require,module,exports){
@@ -148,8 +149,8 @@ var browser = require('./browser');
 var cheerio = require('./cheerio');
 
 module.exports = {
-	browser: browser,
-	cheerio: cheerio
+    browser: browser,
+    cheerio: cheerio
 };
 
 },{"./browser":2,"./cheerio":3}]},{},[1])(1)
