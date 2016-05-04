@@ -33,7 +33,7 @@ console.log(result);
 
 Prints:
 
-```
+```javascript
 { items: [ { text: 'item2 with span' } ] }
 ```
 
@@ -43,7 +43,7 @@ The system works by evaluating an object-formatted DSL
 expression. The syntax of the DSL and its semantics is
 described below.
 
-ObjectExpression:
+`ObjectExpression`:
 
 ```javascript
 {
@@ -52,11 +52,12 @@ ObjectExpression:
 }
 ```
 
-ObjectExpression returns an object with given properties.
-Property values are described by further Expressions.
+`ObjectExpression` returns an object with given properties.
 
-Expression is either CollectionExpression or
-SingleExpression, returning a value described by it.
+Property values are described by further a `Expression`(s).
+
+`Expression` is either `CollectionExpression` or
+`SingleExpression`, returning a value described by it.
 
 CollectionExpression:
 
@@ -69,15 +70,15 @@ CollectionExpression:
 }
 ```
 
-CollectionExpression returns an array of items. Items are extracted
+`CollectionExpression` returns an array of items. Items are extracted
 by applying `extract` expression to each element matched by the
 `selector` CSS rule. If the rule matches no elements then an empty
 array is returned.
 
 Optionally, the `filter` property might be set. Then the array of
-raw elements is first filtered through the FilterExpression.
+raw elements is first filtered through the `FilterExpression`.
 
-SingleExpression:
+`SingleExpression`:
 
 ```javascript
 {
@@ -97,7 +98,7 @@ null is returned.
 Property `type` is optional. When not set, `single` is assumed as
 the default.
 
-FilterExpression:
+`FilterExpression`:
 
 ```javascript
 {
@@ -105,7 +106,7 @@ FilterExpression:
 }
 ```
 
-An element passes a FilterExpression if it has elements that match
+An element passes a `FilterExpression` if it has elements that match
 the CSS rule in the `exists` property.
 
 ## Testing
