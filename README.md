@@ -85,15 +85,17 @@ raw elements is first filtered through the `FilterExpression`.
     "type": "single",
     "selector": CSSSelector,
     "property": String,
-    "attribute": String
+    "attribute": String,
+    "html": Boolean
 }
 ```
 
 Properties `property` and `attribute` are optional. If present
 the extracted value is either a property or an attribute of the
-node matched by the `selector`. If not present, the text contents
-of the element is returned. If `selector` matches nothing then
-null is returned.
+node matched by the `selector`. If `html` property is set to
+`true` then element's markup is extracted. If not present,
+the text contents of the element is returned. If `selector`
+matches nothing then null is returned.
 
 Property `type` is optional. When not set, `single` is assumed as
 the default.

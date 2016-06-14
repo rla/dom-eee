@@ -33,10 +33,14 @@ function single(env, element, spec) {
     var dom = spec.selector === ':self' ? element :
         env.single(element, spec.selector);
     if (dom) {
-        if (spec.attribute) {
+        if (spec.html) {
+            // Extracts outer HTML.
+            return env.html(dom);
+        } if (spec.attribute) {
             // Extracts attribute value.
             return env.attribute(dom, spec.attribute);
         } else if (spec.property) {
+            // Extracts property value.
             return env.property(dom, spec.property);
         } else {
             return env.text(dom).trim().replace(/\s+/g, ' ');
@@ -118,6 +122,9 @@ module.exports = function() {
         text: function(element) {
             return element.textContent;
         },
+        html: function(element) {
+            return element.outerHTML;
+        }
     };
 };
 
@@ -127,7 +134,7 @@ module.exports = function() {
 module.exports = function($) {
     return {
         single: function(element, selector) {
-            return $(selector, element);
+            return $(selector, element).get(0);
         },
         collection: function(element, selector) {
             return $(selector, element).toArray();
@@ -140,6 +147,9 @@ module.exports = function($) {
         },
         text: function(element) {
             return $(element).text();
+        },
+        html: function(element) {
+            return $.html(element);
         }
     };
 };

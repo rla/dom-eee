@@ -56,4 +56,18 @@ describe('EEE with Cheerio', function() {
 			{ env: 'cheerio', cheerio: $ });
 		assert.equal(result.items.length, 1);
 	});
+	it('should extract html', function() {
+		var $ = cheerio.load('<h1>Hello</h1>');
+		var result = eee($.root(),
+			{ text: { selector: 'h1', html: true } },
+			{ env: 'cheerio', cheerio: $ });
+		assert.equal(result.text, '<h1>Hello</h1>');
+	});
+	it('should try extract mismatched element property', function() {
+		var $ = cheerio.load('<a href="/test">Test</a>');
+		var result = eee($.root(),
+			{ prop: { selector: 'span', property: 'href' } },
+			{ env: 'cheerio', cheerio: $ });
+		assert.equal(result.prop, null);
+	});
 });

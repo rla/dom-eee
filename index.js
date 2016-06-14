@@ -32,10 +32,14 @@ function single(env, element, spec) {
     var dom = spec.selector === ':self' ? element :
         env.single(element, spec.selector);
     if (dom) {
-        if (spec.attribute) {
+        if (spec.html) {
+            // Extracts outer HTML.
+            return env.html(dom);
+        } if (spec.attribute) {
             // Extracts attribute value.
             return env.attribute(dom, spec.attribute);
         } else if (spec.property) {
+            // Extracts property value.
             return env.property(dom, spec.property);
         } else {
             return env.text(dom).trim().replace(/\s+/g, ' ');

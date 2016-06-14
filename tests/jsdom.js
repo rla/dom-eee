@@ -54,4 +54,16 @@ describe('EEE with jsdom', function() {
 			});
 		assert.equal(result.items.length, 1);
 	});
+	it('should extract html', function() {
+		document.body.innerHTML = '<h1>Hello</h1>';
+		var result = eee(window.document,
+			{ text: { selector: 'h1', html: true }});
+		assert.equal(result.text, '<h1>Hello</h1>');
+	});
+	it('should try extract mismatched element property', function() {
+		document.body.innerHTML = '<a href="/test">Test</a>';
+		var result = eee(window.document,
+			{ prop: { selector: 'span', property: 'href' } });
+		assert.equal(result.prop, null);
+	});
 });
